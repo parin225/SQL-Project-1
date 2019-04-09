@@ -164,6 +164,13 @@ GROUP BY title
 ORDER BY count(title) desc;
 
 -- Write a query to display how much business, in dollars, each store bought in
+SELECT store.store_id, SUM(amount) AS 'Revenue'
+FROM payment
+INNER JOIN rental ON (payment.rental_id = rental.rental_id)
+INNER JOIN inventory ON (inventory.inventory_id = rental.inventory_id)
+INNER JOIN store ON (store.store_id = inventory.store_id)
+GROUP BY store.store_id; 
+
 -- Write a query to display each stores ID, city and country
 SELECT store.store_id, city.city,country.country
 FROM store
