@@ -90,13 +90,12 @@ ON film.film_id = film_actor.film_id
 GROUP BY film.title;
 
 -- Display the number of copies of the film Hunchback Impossible in the inventory system
-SELECT title, film_id
+SELECT film.title, COUNT(inventory.inventory_id) AS 'Number of Copies'
 FROM film
-WHERE title = "Hunchback Impossible";
-
-SELECT COUNT(inventory_id) AS 'Number of Copies'
-FROM inventory
-WHERE film_id = 439;
+INNER JOIN inventory
+ON film.film_id = inventory.film_id
+GROUP BY film.title
+HAVING film.title = 'Hunchback Impossible';
 
 -- Display the total paid by each customer
 -- Display the customers alphabetically by last name
